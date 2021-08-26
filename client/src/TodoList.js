@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-//import { getTodos } from "./api"
+import { getTodos } from "./api"
 
 export const TodoList = () => {
   const [items, setItems] = useState([])
 
   useEffect(() => {
-   /* const fetchItems = async () => {
+    const fetchItems = async () => {
       const todos = await getTodos()
       setItems(todos)
     }
-    fetchItems()*/
-    setItems([{ text : "i", id: 0}, { text : "i", id: 1}, { text : "i", id: 2}])
+    fetchItems()
   }, [])
 
   return (
@@ -22,11 +21,11 @@ export const TodoList = () => {
           <thead>
             <tr>
               <th>Text</th>
+              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
-         
-          <tbody>    
+          <tbody>
             {
               items.map(todo => (
                 <tr key={todo._id}>
@@ -34,32 +33,17 @@ export const TodoList = () => {
                     {todo.text}
                   </td>
                   <td>
-                    <Link to={"/edit/$ {todo.id}"}>Edit</Link>
+                    {todo.description}
+                  </td>
+                  <td>
+                    <Link to={`/edit/${todo._id}`}>Edit</Link>
                   </td>
                 </tr>
               ))
             }
           </tbody>
-
-
-
         </table>
       </div>
     </div>
   );
 };
-
-/* <tbody>    sa loob to dapat ng return baba ng thead
-            {
-              items.map(todo => (
-                <tr key={todo._id}>
-                  <td>
-                    {todo.text}
-                  </td>
-                  <td>
-                    <Link to={/edit/${todo._id}}>Edit</Link>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>*/
